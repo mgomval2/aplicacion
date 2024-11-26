@@ -11,7 +11,7 @@ class MiAplicacion extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Aplicacion de Inicio de Sesion',
-      theme: ThemeData(primarySwatch: Colors.purple),
+      theme: ThemeData(primarySwatch: Colors.deepOrange),
       home: PantallaLogin(), 
     );
   }

@@ -49,7 +49,7 @@ class PantallaLogin extends StatelessWidget {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const PantallaVacia()),
+                  MaterialPageRoute(builder: (context) => const PantallaPrincipal()),
                 );
               },
               style: ElevatedButton.styleFrom(

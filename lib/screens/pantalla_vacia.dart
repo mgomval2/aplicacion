@@ -1,51 +1,53 @@
 import 'package:flutter/material.dart';
+import 'minijuego.dart'; // Importa la nueva pantalla para el juego
 
-class PantallaVacia extends StatelessWidget {
-  const PantallaVacia({Key? key}) : super(key: key);
+class PantallaPrincipal extends StatelessWidget {
+  const PantallaPrincipal({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Pantalla Vacia'),
+        title: const Text('Biblioteca de Conocimientos'),
       ),
       body: Center(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                padding: const EdgeInsets.symmetric(horizontal: 160, vertical: 200),
-                textStyle: const TextStyle(fontSize: 30),
+                padding: const EdgeInsets.symmetric(horizontal: 60, vertical: 20),
+                textStyle: const TextStyle(fontSize: 20),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(15),
                 ),
-                elevation: 5,
               ),
               onPressed: () {
-                // Acción del primer botón
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('Botón 1 presionado')),
+                // Navega a la pantalla de Explorar Datos
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const Placeholder()), // Cambia Placeholder() por tu pantalla de explorar datos cuando esté lista
                 );
               },
-              child: const Text('Botón 1'),
+              child: const Text('Explorar Datos'),
             ),
+            const SizedBox(height: 20),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                padding: const EdgeInsets.symmetric(horizontal: 160, vertical: 100),
-                textStyle: const TextStyle(fontSize: 30),
+                padding: const EdgeInsets.symmetric(horizontal: 60, vertical: 20),
+                textStyle: const TextStyle(fontSize: 20),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(15),
                 ),
-                elevation: 5,
               ),
               onPressed: () {
-                // Acción del segundo botón
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('Botón 2 presionado')),
+                // Navega a la pantalla del minijuego
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const PantallaMinijuego()),
                 );
               },
-              child: const Text('Botón 2'),
+              child: const Text('Juego: El dato perdido'),
             ),
           ],
         ),
@@ -56,6 +58,6 @@ class PantallaVacia extends StatelessWidget {
 
 void main() {
   runApp(const MaterialApp(
-    home: PantallaVacia(),
+    home: PantallaPrincipal(),
   ));
 }
