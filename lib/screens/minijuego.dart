@@ -9,14 +9,22 @@ class PantallaMinijuego extends StatefulWidget {
 
 class _PantallaMinijuegoState extends State<PantallaMinijuego> {
   final TextEditingController _controller = TextEditingController();
-  final String _datoCurioso = "El _ fue el primer hombre en pisar la Luna.";
-  final String _respuestaCorrecta = "hombre";
 
+  final List<Map<String, String>> _datosCuriosos = [
+    {"dato": "El _ fue el primer hombre en pisar la Luna.", "respuesta": "hombre"},
+    {"dato": "La capital de Francia es _.", "respuesta": "paris"},
+    {"dato": "El Sol es una _ gigante.", "respuesta": "estrella"},
+  ];
+
+  int _indiceActual = 0;
+  int _puntuacion = 0;
   String _retroalimentacion = "";
 
   void _verificarRespuesta() {
-    if (_controller.text.toLowerCase() == _respuestaCorrecta.toLowerCase()) {
+    String respuestaCorrecta = _datosCuriosos[_indiceActual]['respuesta']!;
+    if (_controller.text.toLowerCase() == respuestaCorrecta.toLowerCase()) {
       setState(() {
+        _puntuacion++;
         _retroalimentacion = "¡Correcto! 🎉";
       });
     } else {
@@ -27,8 +35,23 @@ class _PantallaMinijuegoState extends State<PantallaMinijuego> {
   }
 
   void _mostrarPista() {
+    String respuesta = _datosCuriosos[_indiceActual]['respuesta']!;
     setState(() {
-      _retroalimentacion = "Pista: Empieza con 'h'.";
+      _retroalimentacion = "Pista: ${respuesta[0]}${'_' * (respuesta.length - 1)}";
+    });
+  }
+
+  void _cambiarDato() {
+    if (_indiceActual + 1 == _datosCuriosos.length) {
+      setState(() {
+        _retroalimentacion = "¡Juego terminado! 🎉 Puntuación: $_puntuacion";
+      });
+      return;
+    }
+    setState(() {
+      _indiceActual++;
+      _retroalimentacion = "";
+      _controller.clear();
     });
   }
 
@@ -45,7 +68,18 @@ class _PantallaMinijuegoState extends State<PantallaMinijuego> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Text(
-              _datoCurioso,
+              "Puntuacion: $_puntuacion",
+              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              textAlign: TextAlign.center,
+            ),
+            Text(
+              "Dato ${_indiceActual + 1} de ${_datosCuriosos.length}",
+              style: const TextStyle(fontSize: 16, color: Colors.grey),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 10),
+            Text(
+              _datosCuriosos[_indiceActual]['dato']!,
               style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               textAlign: TextAlign.center,
             ),
@@ -67,15 +101,18 @@ class _PantallaMinijuegoState extends State<PantallaMinijuego> {
               onPressed: _mostrarPista,
               child: const Text('Pista'),
             ),
+            const SizedBox(height: 10),
+            ElevatedButton(
+              onPressed: _cambiarDato,
+              child: const Text('Siguiente Dato'),
+            ),
             const SizedBox(height: 20),
             Text(
               _retroalimentacion,
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
-                color: _retroalimentacion == "¡Correcto! 🎉"
-                    ? Colors.green
-                    : Colors.red,
+                color: _retroalimentacion.contains("Correcto") ? Colors.green : Colors.red,
               ),
               textAlign: TextAlign.center,
             ),
