@@ -17,9 +17,3 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
-  assets:
-    - assets/datos_explorar.json
-    - assets/datos_curiosos.json
-    - assets/globo_del_mundo.jpg
-    - assets/icono_explorar.jpg
-    - assets/juego_icono.png
