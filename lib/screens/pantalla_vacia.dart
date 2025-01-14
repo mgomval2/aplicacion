@@ -11,25 +11,34 @@ class PantallaPrincipal extends StatelessWidget {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.transparent,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Colors.deepPurple),
+          onPressed: () {},
+        ),
       ),
       body: Center(
         child: Padding(
-          padding: const EdgeInsets.all(20.0),
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
               // Recuadro del título
               Container(
-                padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 30),
+                margin: const EdgeInsets.only(top: 20),
+                padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
                 decoration: BoxDecoration(
-                  color: const Color.fromARGB(255, 206, 211, 230), // Fondo del recuadro
-                  borderRadius: BorderRadius.circular(15), // Bordes redondeados
+                  gradient: LinearGradient(
+                    colors: [Colors.deepPurple, Colors.purpleAccent],
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                  ),
+                  borderRadius: BorderRadius.circular(15),
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.grey.withOpacity(0.5),
+                      color: Colors.black.withOpacity(0.2),
                       spreadRadius: 2,
-                      blurRadius: 5,
-                      offset: const Offset(0, 3), // Posición de la sombra
+                      blurRadius: 10,
+                      offset: const Offset(0, 3),
                     ),
                   ],
                 ),
@@ -39,11 +48,13 @@ class PantallaPrincipal extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
-                    color: Colors.deepPurple,
+                    color: Colors.white,
                   ),
                 ),
               ),
-              const SizedBox(height: 40), // Espacio entre el título y los botones
+              const SizedBox(height: 30),
+
+              // Botones principales
               Expanded(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -51,7 +62,7 @@ class PantallaPrincipal extends StatelessWidget {
                     _buildCustomButton(
                       context,
                       'Explorar Datos',
-                      'assets/icono_explorar.jpg', // Reemplaza con tu imagen
+                      'assets/icono_explorar.jpg',
                       () {
                         Navigator.push(
                           context,
@@ -62,7 +73,7 @@ class PantallaPrincipal extends StatelessWidget {
                     _buildCustomButton(
                       context,
                       'Juego: El dato perdido',
-                      'assets/juego_icono.png', // Reemplaza con tu imagen
+                      'assets/juego_icono.png',
                       () {
                         Navigator.push(
                           context,
@@ -73,6 +84,7 @@ class PantallaPrincipal extends StatelessWidget {
                   ],
                 ),
               ),
+              const SizedBox(height: 20),
             ],
           ),
         ),
@@ -81,12 +93,23 @@ class PantallaPrincipal extends StatelessWidget {
   }
 
   Widget _buildCustomButton(BuildContext context, String text, String imagePath, VoidCallback onPressed) {
-    return SizedBox(
-      width: MediaQuery.of(context).size.width * 0.4, // Ajusta el tamaño
+    return Container(
+      width: MediaQuery.of(context).size.width * 0.4,
       height: MediaQuery.of(context).size.height * 0.25,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(20),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.1),
+            spreadRadius: 2,
+            blurRadius: 10,
+            offset: const Offset(0, 4),
+          ),
+        ],
+      ),
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          elevation: 5,
+          elevation: 0,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20),
           ),
@@ -96,13 +119,29 @@ class PantallaPrincipal extends StatelessWidget {
         onPressed: onPressed,
         child: Stack(
           children: [
-            // Imagen de marca de agua
+            // Imagen de fondo
             Positioned.fill(
-              child: Opacity(
-                opacity: 0.2,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(20),
                 child: Image.asset(
                   imagePath,
                   fit: BoxFit.cover,
+                ),
+              ),
+            ),
+            // Sombra de superposición
+            Positioned.fill(
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  gradient: LinearGradient(
+                    colors: [
+                      Colors.black.withOpacity(0.4),
+                      Colors.black.withOpacity(0.1),
+                    ],
+                    begin: Alignment.bottomCenter,
+                    end: Alignment.topCenter,
+                  ),
                 ),
               ),
             ),
