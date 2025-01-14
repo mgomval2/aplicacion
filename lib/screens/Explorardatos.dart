@@ -19,16 +19,15 @@ class _PantallaExplorarDatosState extends State<PantallaExplorarDatos>
     super.initState();
     _cargarDatos();
 
-    // Configurar el AnimationController para rotar la imagen continuamente
     _controller = AnimationController(
-      duration: const Duration(seconds: 20), // Tiempo para completar una rotación
+      duration: const Duration(seconds: 20),
       vsync: this,
-    )..repeat(); // Repetir la animación indefinidamente
+    )..repeat();
   }
 
   @override
   void dispose() {
-    _controller.dispose(); // Liberar el AnimationController cuando se destruya el widget
+    _controller.dispose();
     super.dispose();
   }
 
@@ -46,8 +45,6 @@ class _PantallaExplorarDatosState extends State<PantallaExplorarDatos>
           ),
         );
       });
-
-      print("Datos procesados correctamente: $datosCuriosos");
     } catch (e) {
       print("Error al cargar el archivo JSON: $e");
     }
@@ -55,95 +52,112 @@ class _PantallaExplorarDatosState extends State<PantallaExplorarDatos>
 
   @override
   Widget build(BuildContext context) {
+    final List<String> categorias = datosCuriosos.keys.toList();
+    final double screenHeight = MediaQuery.of(context).size.height;
+    final double screenWidth = MediaQuery.of(context).size.width;
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Explorar Datos'),
+        backgroundColor: Colors.deepPurple,
+        elevation: 0,
       ),
       body: datosCuriosos.isEmpty
           ? const Center(child: CircularProgressIndicator())
           : Stack(
               children: [
-                // Bola del mundo giratoria en el centro
-                Center(
+                // Fondo con degradado suave
+                Container(
+                  decoration: const BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [
+                        Color(0xFFE3F2FD), // Azul muy claro
+                        Color(0xFFFCE4EC), // Rosa pastel claro
+                      ],
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                    ),
+                  ),
+                ),
+                // Bola del mundo en el centro
+                Positioned(
+                  top: screenHeight * 0.25,
+                  left: screenWidth / 2 - 130,
                   child: AnimatedBuilder(
                     animation: _controller,
                     builder: (context, child) {
                       return Transform.rotate(
-                        angle: _controller.value * 2 * 3.141592653589793, // Rotación en radianes
+                        angle: _controller.value * 2 * 3.141592653589793,
                         child: child,
                       );
                     },
                     child: CircleAvatar(
-                      radius: 130,
+                      radius: 130, // Tamaño aumentado
                       backgroundImage: AssetImage('assets/globo_del_mundo.jpg'),
+                      backgroundColor: Colors.white,
                     ),
                   ),
                 ),
-                // Botones de categorías
-                _crearBotones(context),
+                // Botones del lado izquierdo
+                Positioned(
+                  left: screenWidth * 0.1,
+                  top: screenHeight * 0.3,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      _buildCategoryButton(context, categorias[0]),
+                      SizedBox(height: screenHeight * 0.1),
+                      _buildCategoryButton(context, categorias[1]),
+                      SizedBox(height: screenHeight * 0.1),
+                      _buildCategoryButton(context, categorias[2]),
+                    ],
+                  ),
+                ),
+                // Botones del lado derecho
+                Positioned(
+                  right: screenWidth * 0.1,
+                  top: screenHeight * 0.3,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      _buildCategoryButton(context, categorias[3]),
+                      SizedBox(height: screenHeight * 0.1),
+                      _buildCategoryButton(context, categorias[4]),
+                      SizedBox(height: screenHeight * 0.1),
+                      _buildCategoryButton(context, categorias[5]),
+                    ],
+                  ),
+                ),
               ],
             ),
     );
   }
 
-  Widget _crearBotones(BuildContext context) {
-  final categories = datosCuriosos.keys.toList();
-  return Stack(
-    children: [
-      Align(
-        alignment: const Alignment(-0.8, -0.5), // Botón superior izquierdo
-        child: _buildCategoryButton(context, categories[0]),
-      ),
-      Align(
-        alignment: const Alignment(0.8, -0.5), // Botón superior derecho
-        child: _buildCategoryButton(context, categories[1]),
-      ),
-      Align(
-        alignment: const Alignment(-0.8, 0.5), // Botón inferior izquierdo
-        child: _buildCategoryButton(context, categories[2]),
-      ),
-      Align(
-        alignment: const Alignment(0.8, 0.5), // Botón inferior derecho
-        child: _buildCategoryButton(context, categories[3]),
-      ),
-      Align(
-        alignment: const Alignment(-0.4, 0.0), // Botón medio izquierdo
-        child: _buildCategoryButton(context, categories[4]),
-      ),
-      Align(
-        alignment: const Alignment(0.4, 0.0), // Botón medio derecho
-        child: _buildCategoryButton(context, categories[5]),
-      ),
-    ],
-  );
-}
-
-
   Widget _buildCategoryButton(BuildContext context, String category) {
-    return SizedBox(
-      width: 160,
-      height: 60,
-      child: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          elevation: 10,
-          backgroundColor: Colors.purple.shade100,
-          shadowColor: Colors.purple,
-          textStyle: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(25),
+    return ElevatedButton(
+      style: ElevatedButton.styleFrom(
+        elevation: 3,
+        backgroundColor: Colors.white,
+        padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 20), // Botones más largos
+        textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(25),
+        ),
+        side: const BorderSide(color: Colors.deepPurpleAccent, width: 1.5),
+      ),
+      onPressed: () {
+        _mostrarDatoCurioso(context, category);
+      },
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          const Icon(Icons.lightbulb_outline, color: Colors.deepPurple),
+          const SizedBox(width: 10),
+          Text(
+            category,
+            style: const TextStyle(color: Colors.deepPurple),
           ),
-        ),
-        onPressed: () {
-          _mostrarDatoCurioso(context, category);
-        },
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Icon(Icons.info_outline, color: Colors.purple.shade700),
-            const SizedBox(width: 10),
-            Text(category),
-          ],
-        ),
+        ],
       ),
     );
   }
@@ -157,17 +171,27 @@ class _PantallaExplorarDatosState extends State<PantallaExplorarDatos>
         return StatefulBuilder(
           builder: (context, setState) {
             return AlertDialog(
-              title: Text('Dato Curioso: $category'),
-              content: Text(datosCuriosos[category]![currentIndex]),
+              backgroundColor: Colors.deepPurple.shade50,
+              title: Text(
+                'Dato Curioso: $category',
+                style: const TextStyle(color: Colors.deepPurple),
+              ),
+              content: Text(
+                datosCuriosos[category]![currentIndex],
+                style: const TextStyle(color: Colors.black87),
+              ),
               actions: <Widget>[
                 TextButton(
                   onPressed: () {
                     Navigator.of(context).pop();
                   },
-                  child: const Text('Cerrar'),
+                  child: const Text(
+                    'Cerrar',
+                    style: TextStyle(color: Colors.deepPurple),
+                  ),
                 ),
                 IconButton(
-                  icon: const Icon(Icons.arrow_forward),
+                  icon: const Icon(Icons.arrow_forward, color: Colors.deepPurple),
                   onPressed: () {
                     setState(() {
                       currentIndex =
