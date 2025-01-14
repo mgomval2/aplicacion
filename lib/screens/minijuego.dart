@@ -51,26 +51,24 @@ class _PantallaMinijuegoState extends State<PantallaMinijuego> {
     if (_controller.text.toLowerCase() == respuestaCorrecta.toLowerCase()) {
       setState(() {
         _puntuacion++;
-        _retroalimentacion = "¡Correcto! 🎉";
       });
+      _mostrarVentanaEmergente("¡Correcto! 🎉", "Has acertado la respuesta.");
     } else {
-      setState(() {
-        _retroalimentacion = "Intenta de nuevo 😅";
-      });
+      _mostrarVentanaEmergente(
+          "Intenta de nuevo 😅", "La respuesta no es correcta. ¡Inténtalo nuevamente!");
     }
   }
 
   void _mostrarPista() {
     String respuesta = _datosCuriosos[_indiceActual]['respuesta']!;
-    setState(() {
-      _retroalimentacion = "Pista: ${respuesta[0]}${'_' * (respuesta.length - 1)}";
-    });
+    _mostrarVentanaEmergente("Pista", "La palabra comienza con: ${respuesta[0]}");
   }
 
   void _cambiarDato() {
     if (_indiceActual + 1 == _datosCuriosos.length) {
       setState(() {
-        _retroalimentacion = "¡Juego terminado! 🎉 Puntuación: $_puntuacion";
+         _mostrarVentanaEmergente(
+          "Juego terminado 🎉", "¡Has completado el juego! Tu puntuación es $_puntuacion.");
       });
       return;
     }
@@ -79,6 +77,43 @@ class _PantallaMinijuegoState extends State<PantallaMinijuego> {
       _retroalimentacion = "";
       _controller.clear();
     });
+  }
+
+
+  
+
+
+  void _mostrarVentanaEmergente(String titulo, String mensaje) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+          title: Text(
+            titulo,
+            style: TextStyle(
+              color: titulo.contains("Correcto") ? Colors.green : Colors.deepPurple,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          content: Text(
+            mensaje,
+            style: const TextStyle(fontSize: 16),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: const Text(
+                "Cerrar",
+                style: TextStyle(color: Colors.deepPurple),
+              ),
+            ),
+          ],
+        );
+      },
+    );
   }
 
   @override

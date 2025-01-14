@@ -1,35 +1,64 @@
 {
-    "categorias": {
-      "Deporte": [
-        "¿Sabías que el fútbol es el deporte más practicado en el mundo?",
-        "¿Sabías que el baloncesto fue inventado en 1891?",
-        "¿Sabías que la maratón moderna se basa en la leyenda del mensajero griego Filipides?"
-      ],
-      "Ciencia": [
-        "¿Sabías que la luz tarda 8 minutos y 20 segundos en viajar del Sol a la Tierra?",
-        "¿Sabías que los humanos comparten el 98% de su ADN con los chimpancés?",
-        "¿Sabías que el cerebro humano genera suficientes impulsos eléctricos como para encender una bombilla?"
-      ],
-      "Entretenimiento": [
-        "¿Sabías que la película más taquillera de la historia es Avatar?",
-        "¿Sabías que el videojuego más vendido de todos los tiempos es Minecraft?",
-        "¿Sabías que el libro más vendido en la historia es la Biblia?"
-      ],
-      "Dato al Azar": [
-        "¿Sabías que los koalas duermen hasta 22 horas al día?",
-        "¿Sabías que el tiburón ballena es el pez más grande del mundo?",
-        "¿Sabías que las cucarachas pueden vivir sin cabeza durante semanas?"
-      ],
-      "Arte": [
-        "Sabías que la Mona Lisa no tiene cejas porque era común en esa época depilarlas",
-        "Sabías que Vincent Van Gogh solo vendió una pintura en toda su vida",
-        "¿Sabías que el David de Miguel Ángel pesa más de 6 toneladas?"
-      ],
-      "Historia": [
-        "¿Sabías que la Gran Muralla China no es visible desde el espacio a simple vista?",
-        "¿Sabías que Cleopatra vivió más cerca de la invención del iPhone que de la construcción de las pirámides?",
-        "¿Sabías que la Primera Guerra Mundial comenzó en 1914?"
-      ]
-    }
+  "categorias": {
+    "Deporte": [
+      "¿Sabías que el fútbol es el deporte más practicado en el mundo?",
+      "¿Sabías que el baloncesto fue inventado en 1891?",
+      "¿Sabías que la maratón moderna se basa en la leyenda del mensajero griego Filipides?",
+      "¿Sabías que el tenis se originó en Francia en el siglo XII?",
+      "¿Sabías que el récord mundial de salto de longitud masculino ha estado vigente desde 1991?",
+      "¿Sabías que el cricket es el segundo deporte más popular del mundo?",
+      "¿Sabías que la NFL genera más ingresos que cualquier otra liga deportiva?",
+      "¿Sabías que el boxeo fue un deporte olímpico desde 688 a.C.?"
+    ],
+    "Ciencia": [
+      "¿Sabías que la luz tarda 8 minutos y 20 segundos en viajar del Sol a la Tierra?",
+      "¿Sabías que los humanos comparten el 98% de su ADN con los chimpancés?",
+      "¿Sabías que el cerebro humano genera suficientes impulsos eléctricos como para encender una bombilla?",
+      "¿Sabías que hay más estrellas en el universo que granos de arena en todas las playas de la Tierra?",
+      "¿Sabías que el corazón humano late aproximadamente 100,000 veces al día?",
+      "¿Sabías que los delfines tienen nombres individuales para comunicarse?",
+      "¿Sabías que las arañas pueden regenerar sus extremidades?",
+      "¿Sabías que las medusas existen desde hace más de 500 millones de años?"
+    ],
+    "Entretenimiento": [
+      "¿Sabías que la película más taquillera de la historia es Avatar?",
+      "¿Sabías que el videojuego más vendido de todos los tiempos es Minecraft?",
+      "¿Sabías que el libro más vendido en la historia es la Biblia?",
+      "¿Sabías que Los Simpson es la serie animada más larga de la historia?",
+      "¿Sabías que la canción más reproducida en Spotify es 'Blinding Lights' de The Weeknd?",
+      "¿Sabías que los Globos de Oro comenzaron en 1944?",
+      "¿Sabías que la franquicia de Marvel ha recaudado más de 20 mil millones de dólares?",
+      "¿Sabías que 'El Señor de los Anillos' fue grabado íntegramente en Nueva Zelanda?"
+    ],
+    "Dato al Azar": [
+      "¿Sabías que los koalas duermen hasta 22 horas al día?",
+      "¿Sabías que el tiburón ballena es el pez más grande del mundo?",
+      "¿Sabías que las cucarachas pueden vivir sin cabeza durante semanas?",
+      "¿Sabías que los flamingos se vuelven rosados por la dieta que consumen?",
+      "¿Sabías que los elefantes no pueden saltar?",
+      "¿Sabías que los humanos tienen alrededor de 700 músculos?",
+      "¿Sabías que las estrellas de mar no tienen cerebro?",
+      "¿Sabías que el caracol puede dormir durante tres años?"
+    ],
+    "Arte": [
+      "¿Sabías que la Mona Lisa no tiene cejas porque era común en esa época depilarlas?",
+      "¿Sabías que Vincent Van Gogh solo vendió una pintura en toda su vida?",
+      "¿Sabías que el David de Miguel Ángel pesa más de 6 toneladas?",
+      "¿Sabías que el cuadro 'El Grito' de Munch ha sido robado dos veces?",
+      "¿Sabías que Picasso aprendió a dibujar antes de caminar?",
+      "¿Sabías que el Coliseo de Roma tiene más de 1900 años?",
+      "¿Sabías que la Capilla Sixtina tiene más de 500 figuras pintadas por Miguel Ángel?",
+      "¿Sabías que las pirámides egipcias se alinean perfectamente con las estrellas?"
+    ],
+    "Historia": [
+      "¿Sabías que la Gran Muralla China no es visible desde el espacio a simple vista?",
+      "¿Sabías que Cleopatra vivió más cerca de la invención del iPhone que de la construcción de las pirámides?",
+      "¿Sabías que la Primera Guerra Mundial comenzó en 1914?",
+      "¿Sabías que Napoleón era aproximadamente 1.69 metros de altura, no 'pequeño' como se dice?",
+      "¿Sabías que la Declaración de Independencia de EE. UU. fue firmada en 1776?",
+      "¿Sabías que la Torre Eiffel fue inicialmente un proyecto temporal?",
+      "¿Sabías que los vikingos nunca usaron cascos con cuernos?",
+      "¿Sabías que la Revolución Francesa introdujo los derechos humanos como los conocemos hoy?"
+    ]
   }
-  
+}
